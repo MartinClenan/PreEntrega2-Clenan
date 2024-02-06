@@ -6,7 +6,16 @@ const productos = [
   { id: 5, nombre: "Bcaa Recovery", tamaño: "300g", precio: 15000 }
 ];
 
-console.log("Nombre: " + productos[1].nombre + " $" + productos[1].precio);
-
-let producto = productos.find(item => item.id === 1);
-console.log(producto.nombre + " (" + producto.tamaño + ")")
+class Carrito{
+  constructor(){
+      this.productos = [];
+      this.total = 0;
+  }
+  
+  agregarProducto(id){
+      let producto = productos.find(product => product.id === id);
+      if(producto){
+          this.productos.push(producto);
+      }
+  }
+}
