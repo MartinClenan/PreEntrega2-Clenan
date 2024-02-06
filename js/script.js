@@ -1,5 +1,4 @@
 
-
 class Carrito {
   constructor() {
     this.productos = [];
@@ -48,23 +47,6 @@ class Carrito {
   }
 }
 
-// const carrito = new Carrito();
-// carrito.agregarProducto(2);
-// carrito.agregarProducto(3);
-// carrito.agregarProducto(3);
-
-// carrito.listaCarrito();
-
-// console.log("Total de productos en mi carrito: " + carrito.calcularTotalProductos());
-
-// let totalCompra = carrito.calcularSumaTotalProductos();
-// let descuento = carrito.aplicarDescuento();
-// let totalConDescuento = totalCompra - descuento;
-
-// console.log("Total de la compra: $" + totalCompra);
-// console.log("Descuento: $" + descuento);
-// console.log("Total con descuento: $" + totalConDescuento);
-
 const productos = [
   { id: 1, nombre: "Proteína Whey Pro 2.0", tamaño: "1kg", precio: 18000 },
   { id: 2, nombre: "TrueMade Whey Protein", tamaño: "930g", precio: 32000 },
@@ -80,6 +62,8 @@ let proteinas;
 let creatinas;
 let aminoacidos;
 
+const carrito = new Carrito(); // Instanciamos el carrito
+
 do {
   function saludarUsuario() {
     return (
@@ -89,7 +73,6 @@ do {
     );
   }
   alert(saludarUsuario());
-  
 
   do {
     categoria = prompt(
@@ -98,26 +81,18 @@ do {
 
     switch (categoria) {
       case "1":
-        let proteinas = prompt(
+        proteinas = prompt(
           "Elija qué proteína desea: \n 1-Proteína Whey Pro 2.0. \n 2-TrueMade Whey Protein"
         );
         switch (proteinas) {
           case "1":
             console.log("Elegiste la Proteína Whey Pro 2.0");
-            let proteinaSeleccionada = productos.find(
-              (producto) => producto.id === 1
-            );
-            console.log("Detalles del producto:");
-            console.log(proteinaSeleccionada);
+            carrito.agregarProducto(1); // Se agrega el producto al carrito
             break;
 
           case "2":
             console.log("Elegiste TrueMade Whey Protein");
-            let trueMadeProtein = productos.find(
-              (producto) => producto.id === 2
-            );
-            console.log("Detalles del producto:");
-            console.log(trueMadeProtein);
+            carrito.agregarProducto(2); // Se agrega el producto al carrito
             break;
 
           default:
@@ -126,26 +101,18 @@ do {
         break;
 
       case "2":
-        let creatinas = prompt(
+        creatinas = prompt(
           "Elija qué creatina desea: \n 1-Creatina Crea Shock. \n 2-Creatina Micronizada."
         );
         switch (creatinas) {
           case "1":
             console.log("Elegiste Creatina Crea Shock");
-            let creatinaCreaShock = productos.find(
-              (producto) => producto.id === 3
-            );
-            console.log("Detalles del producto:");
-            console.log(creatinaCreaShock);
+            carrito.agregarProducto(3); // Se agrega el producto al carrito
             break;
 
           case "2":
             console.log("Elegiste Creatina Micronizada");
-            let creatinaMicronizada = productos.find(
-              (producto) => producto.id === 4
-            );
-            console.log("Detalles del producto:");
-            console.log(creatinaMicronizada);
+            carrito.agregarProducto(4); // Se agrega el producto al carrito
             break;
 
           default:
@@ -154,22 +121,18 @@ do {
         break;
 
       case "3":
-        let aminoacidos = prompt(
+        aminoacidos = prompt(
           "Elija qué aminoácido desea: \n 1-Bcaa Recovery. \n 2-Gluta Reload."
         );
         switch (aminoacidos) {
           case "1":
             console.log("Elegiste Bcaa Recovery");
-            let BcaaRecovery = productos.find((producto) => producto.id === 5);
-            console.log("Detalles del producto:");
-            console.log(BcaaRecovery);
+            carrito.agregarProducto(5); // Se agrega el producto al carrito
             break;
 
           case "2":
             console.log("Elegiste Gluta Reload");
-            let GlutaReload = productos.find((producto) => producto.id === 6);
-            console.log("Detalles del producto:");
-            console.log(GlutaReload);
+            carrito.agregarProducto(6); // Se agrega el producto al carrito
             break;
 
           default:
@@ -186,6 +149,14 @@ do {
       "¿Desea realizar otra compra? (Sí/No)"
     ).toLowerCase();
   } while (otraCompra === "si");
+
+  console.log("Detalles del Carrito:");
+  carrito.listaCarrito();
+  console.log("Total de productos en el carrito: " + carrito.calcularTotalProductos());
+  console.log("Total de la compra: $" + carrito.calcularSumaTotalProductos());
+  let descuento = carrito.aplicarDescuento();
+  console.log("Descuento aplicado: $" + descuento);
+  console.log("Total a pagar con descuento: $" + (carrito.calcularSumaTotalProductos() - descuento));
 
   var VerCategoriasDeNuevo = confirm("¿Desea ver las categorías de nuevo?");
 } while (VerCategoriasDeNuevo);
